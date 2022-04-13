@@ -148,7 +148,11 @@ Parameters: list of strs
 Returns: list of floats
 '''
 def buildUniformProbs(unigrams):
-    return
+    le = len(unigrams)
+    lst = []
+    for i in range(le):
+        lst.append(1/le)
+    return lst
 
 
 '''
@@ -356,6 +360,7 @@ if __name__ == "__main__":
     test.testGetStartWords()
     test.testCountStartWords()
     test.testCountBigrams()
+    test.testBuildUniformProbs()
 
     ## Uncomment these for Week 2 ##
     
