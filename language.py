@@ -39,7 +39,11 @@ Parameters: 2D list of strs
 Returns: int
 '''
 def getCorpusLength(corpus):
-    return
+    count = 0
+    for ele in corpus:
+        count += len(ele)
+    #print(count)
+    return count
 
 
 '''
@@ -303,6 +307,7 @@ if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()'''
     test.testLoadBook()
+    test.testGetCorpusLength()
 
     ## Uncomment these for Week 2 ##
     
