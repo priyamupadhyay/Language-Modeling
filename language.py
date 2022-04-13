@@ -226,7 +226,9 @@ Returns: str
 import random
 from random import choices
 def generateTextFromUnigrams(count, words, probs):
-    return
+    lst = choices(words,k = count, weights=probs)
+    sentence = " ".join(lst)
+    return sentence
 
 
 '''
@@ -396,6 +398,7 @@ if __name__ == "__main__":
     test.testBuildUnigramProbs()
     test.testBuildBigramProbs()
     test.testGetTopWords()
+    test.testGenerateTextFromUnigrams()
 
     ## Uncomment these for Week 2 ##
     
