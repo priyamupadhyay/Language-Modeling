@@ -5,6 +5,7 @@ Roll No:
 """
 
 import language_tests as test
+from collections import Counter
 
 project = "Language" # don't edit this
 
@@ -17,7 +18,18 @@ Parameters: str
 Returns: 2D list of strs
 '''
 def loadBook(filename):
-    return
+    with open(filename,'r') as f:
+        listl=[]
+        for line in f:
+            strip_lines=line.strip()
+            listli=strip_lines.split()
+            #print(listli)
+            if listli:
+                m=listl.append(listli)
+            else:
+                continue
+       #print(listl)
+    return listl
 
 
 '''
@@ -27,7 +39,11 @@ Parameters: 2D list of strs
 Returns: int
 '''
 def getCorpusLength(corpus):
-    return
+    count = 0
+    for ele in corpus:
+        count += len(ele)
+    #print(count)
+    return count
 
 
 '''
@@ -37,7 +53,13 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def buildVocabulary(corpus):
-    return
+    list = []
+    for i in range(len(corpus)):
+        for j in range(len(corpus[i])):
+            if corpus[i][j] not in list:
+                list.append(corpus[i][j])
+            #print(corpus[i][j])
+    return list
 
 
 '''
@@ -47,7 +69,17 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countUnigrams(corpus):
-    return
+    dict = {}
+    for i in range(len(corpus)):
+        for j in range(len(corpus[i])):
+            temp = corpus[i][j]
+            if temp in dict:
+                dict[temp] += 1
+            else:
+                dict[temp] = 1
+                #dict[temp] = count
+    #print(dict)
+    return dict
 
 
 '''
@@ -128,6 +160,7 @@ generateTextFromUnigrams(count, words, probs)
 Parameters: int ; list of strs ; list of floats
 Returns: str
 '''
+import random
 from random import choices
 def generateTextFromUnigrams(count, words, probs):
     return
@@ -225,7 +258,7 @@ def barPlot(dict, title):
         names.append(k)
         values.append(dict[k])
 
-    plt.bar(names, values)
+    plt.bar(names, values, color = 'green')
 
     plt.xticks(rotation='vertical')
     plt.title(title)
@@ -285,21 +318,23 @@ def scatterPlot(xs, ys, labels, title):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    '''print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
     test.week1Tests()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek1()
+    test.runWeek1()'''
+    test.testLoadBook()
+    test.testGetCorpusLength()
+    test.testBuildVocabulary()
+    test.testCountUnigrams()
 
     ## Uncomment these for Week 2 ##
-"""
-    print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
+    
+    '''print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek2()
-"""
+    test.runWeek2()'''
+    
 
     ## Uncomment these for Week 3 ##
-"""
-    print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek3()
-"""
+    '''print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
+    test.runWeek3()'''
