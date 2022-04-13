@@ -317,7 +317,20 @@ Parameters: 2D list of strs ; 2D list of strs ; int
 Returns: dict mapping strs to (lists of values)
 '''
 def setupChartData(corpus1, corpus2, topWordCount):
-    return
+    list_1=[]
+    dict={}
+    corpus1_probs=[]
+    corpus2_probs=[]
+    values1=getTopWords(topWordCount,buildVocabulary(corpus1),buildUnigramProbs(buildVocabulary(corpus1),countUnigrams(corpus1),getCorpusLength(corpus1)), ignore)
+    values2=getTopWords(topWordCount,buildVocabulary(corpus2),buildUnigramProbs(buildVocabulary(corpus2),countUnigrams(corpus2),getCorpusLength(corpus2)), ignore) 
+    values1.update(values2)  
+    list_1=list(values1.keys()) 
+    corpus1_probs=buildUnigramProbs(list_1,countUnigrams(corpus1),getCorpusLength(corpus1)) 
+    corpus2_probs=buildUnigramProbs(list_1,countUnigrams(corpus2),getCorpusLength(corpus2)) 
+    dict["topWords"]=list_1
+    dict["corpus1Probs"]=corpus1_probs
+    dict["corpus2Probs"]=corpus2_probs
+    return dict
 
 
 '''
@@ -327,6 +340,8 @@ Parameters: 2D list of strs ; str ; 2D list of strs ; str ; int ; str
 Returns: None
 '''
 def graphTopWordsSideBySide(corpus1, name1, corpus2, name2, numWords, title):
+    out = setupChartData(corpus1, corpus2, numWords)
+    sideBySideBarPlots(out['topWords'], out['corpus1Probs'], out['corpus2Probs'], name1, name2, title)
     return
 
 
@@ -439,7 +454,7 @@ if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
     test.runWeek2()'''
     
-
+    test.testSetupChartData()
     ## Uncomment these for Week 3 ##
     print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
     test.runWeek3()
